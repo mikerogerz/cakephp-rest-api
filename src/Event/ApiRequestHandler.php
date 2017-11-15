@@ -100,10 +100,11 @@ class ApiRequestHandler implements EventListenerInterface
         $request = $event->data['request'];
         $response = $event->data['response'];
 
-        if ('xml' === Configure::read('ApiRequest.responseType')) {
-            $response->type('xml');
-        } else {
-            $response->type('json');
+        $responseType = Configure::read('ApiRequest.responseType');
+        if ('xml' === $responseType) {
+            $response = $response->withType('xml');
+        } else if ('json' === $responseType) {
+            $response = $response->withType('json');
         }
 
         $response->cors($request)
