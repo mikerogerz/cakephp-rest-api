@@ -78,7 +78,7 @@ class ApiExceptionRenderer extends ExceptionRenderer
     {
         $response = $this->_getController()->response;
         $code = $this->_code($exception);
-        $response->getStatusCode($this->_code($exception));
+        $response->statusCode($code);
 
         Configure::write('apiExceptionMessage', $exception->getMessage());
 
